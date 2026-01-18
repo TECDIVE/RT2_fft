@@ -241,6 +241,12 @@ class SDRplayController:
                 # IF Type
                 if ReceiverConfig.IF_MODE == "Zero":
                     ch.tunerParams.ifType = IFType.ZERO
+                elif ReceiverConfig.IF_MODE == "IF_2_048":
+                    ch.tunerParams.ifType = IFType.IF_2_048
+                elif ReceiverConfig.IF_MODE == "IF_1_620":
+                    ch.tunerParams.ifType = IFType.IF_1_620
+                elif ReceiverConfig.IF_MODE == "IF_0_450":
+                    ch.tunerParams.ifType = IFType.IF_0_450
                 else:
                     ch.tunerParams.ifType = IFType.ZERO  # Default
 

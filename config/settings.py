@@ -41,9 +41,15 @@ class ReceiverConfig:
     # Częstotliwość - PRECYZYJNA linia wodoru HI 21cm
     CENTER_FREQ_MHZ = 1420.40575177     # Częstotliwość centralna [MHz] - dokładna linia HI
 
+    # Kalibracja częstotliwości
+    FREQ_CALIBRATION_ENABLED = True     # Czy używać kalibracji
+    FREQ_OFFSET_PPM = 0.0               # Offset w PPM (parts per million)
+    FREQ_OFFSET_KHZ = 0.0               # Dodatkowy offset w kHz
+    # Efektywna częstotliwość = CENTER_FREQ * (1 + PPM/1e6) + OFFSET_KHZ/1000
+
     # Próbkowanie
-    SAMPLE_RATE_MHZ = 6.0           # Częstotliwość próbkowania [MHz]
-    BANDWIDTH_MHZ = 1536            # Szerokość pasma IF [wartość dla API: 200, 300, 600, 1536, 5000, 6000, 7000, 8000]
+    SAMPLE_RATE_MHZ = 6.0           # Częstotliwość próbkowania [MHz] - max dla 14-bit ADC
+    BANDWIDTH_MHZ = 6000            # Szerokość pasma IF [kHz] - BW_6_000 (pełne 6 MHz)
 
     # Wzmocnienie i LNA
     GAIN_REDUCTION_DB = 55          # Redukcja wzmocnienia IF [dB] (20-59)
@@ -54,12 +60,16 @@ class ReceiverConfig:
     AGC_ENABLED = False             # AGC wyłączony (manualna kontrola)
 
     # Filtry
-    RF_NOTCH_ENABLED = True         # Filtr notch FM (włączony)
-    RF_DAB_NOTCH_ENABLED = True     # Filtr notch DAB (włączony)
+    RF_NOTCH_ENABLED = False        # Filtr notch FM 85-100 MHz (wyłączony - nie przeszkadza przy 1420 MHz)
+    RF_DAB_NOTCH_ENABLED = False    # Filtr notch DAB 165-230 MHz (wyłączony - nie przeszkadza przy 1420 MHz)
 
     # IF i LO
-    IF_MODE = "Zero"                # Zero IF (baseband)
+    IF_MODE = "Zero"                # Zero IF - jedyny sposób na uniknięcie image frequency przy szerokim paśmie
     LO_MODE = "Auto"                # Automatyczny dobór LO
+    
+    # DC Spike Mitigation (software)
+    DC_NOTCH_ENABLED = True         # Włącz software notch filter na DC spike
+    DC_NOTCH_WIDTH_KHZ = 50         # Szerokość notch (kHz) - usuwa DC spike ale zachowuje większość sygnału HI
 
     # DC offset correction
     DC_OFFSET_ENABLED = True        # Korekcja DC (włączona)
@@ -86,6 +96,11 @@ class ProcessingConfig:
     # Averaging
     AVERAGING_ENABLED = True        # Uśrednianie widm
     AVERAGING_FACTOR = 10           # Liczba widm do uśrednienia
+
+    # Integracja długoterminowa (radioastronomia)
+    SPECTRUM_INTEGRATION_COUNT = 1000      # Liczba widm do zintegrowania (domyślnie)
+    SPECTRUM_INTEGRATION_ENABLED = False   # Czy integracja jest aktywna
+    SPECTRUM_INTEGRATION_AUTO_SAVE = False # Automatyczny zapis po zakończeniu
 
     # Detekcja
     DETECTION_THRESHOLD_SIGMA = 3.0 # Próg detekcji [sigma powyżej szumu]

@@ -1,13 +1,19 @@
-# Zależności dla Radioteleskopu 1420 MHz
-# Instalacja: pip install -r requirements.txt
+# RT2_fft - Radioteleskop 1420 MHz
+# Wymagane pakiety Python
 
-# Podstawowe biblioteki
-numpy>=1.24.0
+# GUI Framework
 PyQt5>=5.15.0
-pyqtgraph>=0.13.0
+pyqtgraph>=0.12.0
 
-# Opcjonalne (dla przyszłych funkcji)
-# scipy>=1.10.0
-# astropy>=5.0
-# h5py>=3.8.0
-# matplotlib>=3.7.0
+# Obliczenia numeryczne
+numpy>=1.20.0
+scipy>=1.7.0
+
+# Wizualizacja (dla skryptu analizy)
+matplotlib>=3.3.0
+
+# Dodatkowe narzędzia
+pathlib2>=2.3.0; python_version < '3.4'
+
+# Opcjonalne (jeśli nie używasz ctypes bezpośrednio)
+# sdrplay-api - interfejs do SDRplay (dostępny przez ctypes w projekcie)
