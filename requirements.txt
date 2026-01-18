@@ -1,0 +1,13 @@
+# Zależności dla Radioteleskopu 1420 MHz
+# Instalacja: pip install -r requirements.txt
+
+# Podstawowe biblioteki
+numpy>=1.24.0
+PyQt5>=5.15.0
+pyqtgraph>=0.13.0
+
+# Opcjonalne (dla przyszłych funkcji)
+# scipy>=1.10.0
+# astropy>=5.0
+# h5py>=3.8.0
+# matplotlib>=3.7.0
